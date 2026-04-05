@@ -36,4 +36,33 @@ public class Parser {
 
         throw new RuntimeException("Unexpected token: " + peek().getValue());
     }
+
+    private boolean isAtEnd() {
+        return tokens.get(current).getType() == TokenType.EOF;
+    }
+
+    private Token peek() {
+        return tokens.get(current);
+    }
+
+    private Token previous() {
+        return tokens.get(current - 1);
+    }
+
+    private boolean check(TokenType type) {
+        if (isAtEnd())
+            return false;
+        return peek().getType() == type;
+    }
+
+    private boolean match(TokenType... types) {
+        for (TokenType type : types) {
+            if (check(type)) {
+                current++;
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
