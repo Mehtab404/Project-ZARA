@@ -1,5 +1,5 @@
+import java.util.*;
 
-import java.util.List;
 public class Parser {
     private List<Token> tokens;
     private int current = 0;
@@ -8,4 +8,14 @@ public class Parser {
         this.tokens = tokens;
     }
 
+    public List<Instruction> parse() {
+        List<Instruction> instructions = new ArrayList<>();
+
+        while (!isAtEnd()) {
+            if (match(TokenType.NEWLINE)) continue;
+            instructions.add(parseStatement());
+        }
+
+        return instructions;
+    }
 }
