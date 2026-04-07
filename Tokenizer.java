@@ -37,6 +37,22 @@ public class Tokenizer {
                 pos++;
                 continue;
             }
+            switch (ch) {
+                case '+':
+                    tokenList.add(new Token(TokenType.SUM, "+", line));
+                    break;
+                case '-':
+                    tokenList.add(new Token(TokenType.SUB, "-", line));
+                    break;
+                case '*':
+                    tokenList.add(new Token(TokenType.MUL, "*", line));
+                    break;
+                case '/':
+                    tokenList.add(new Token(TokenType.DIVIDE, "/", line));
+                    break;
+
+
+            }
         }
     
     }
