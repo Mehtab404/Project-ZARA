@@ -28,6 +28,15 @@ public class Tokenizer {
                 tokenList.add(readNumber());
                 continue;
             }
+            if (Character.isLetter(ch)) {
+                tokenList.add(readWord());
+                continue;
+            }
+
+            if (Character.isWhitespace(ch)) {
+                pos++;
+                continue;
+            }
         }
     
     }
