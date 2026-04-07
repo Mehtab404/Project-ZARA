@@ -37,6 +37,54 @@ public class Parser {
         throw new RuntimeException("Unexpected token: " + peek().getValue());
     }
 
+        private Instruction parseAssign() {
+        Token name = consume(TokenType.IDENTIFIER, "Expected variable name");
+        consume(TokenType.EQUAL, "Expected '='");
+
+        Expression expr = parseExpression();
+        return new AssignInstruction(name.getValue(), expr);
+    }
+
+        private Instruction parsePrint() {
+        Expression expr = parseExpression();
+        return new PrintInstruction(expr);
+    }
+
+     private Instruction parseIf() {
+        Expression condition = parseExpression();
+        consume(TokenType.COLON, "Expected ':'");
+        consume(TokenType.NEWLINE, "Expected newline");
+
+        List<Instruction> body = new ArrayList<>();
+
+        while(!check(TokenType.DEDENT)&& !isAtEnd()){
+            if (match(TokenType.NEWLINE)) continue;
+            body.add(parseStatement());
+        }
+
+        return new IfInstruction(condition, body);
+    }
+
+        private Instruction parseLoop() {
+        Expression count = parseExpression();
+        consume(TokenType.COLON, "Expected ':'");
+        consume(TokenType.NEWLINE, "Expected newline");
+
+        List<Instruction> body = new ArrayList<>();
+
+        while(!check(TokenType.DEDENT)&&!isAtEnd()){
+            if(match(TokenType.NEWLINE)) continue;
+            body.add(parseStatement());
+        }
+
+        return new RepeatInstruction(count, body);
+    }
+    private Expression parseExpression() {
+        return null;
+    }
+
+
+
     private boolean isAtEnd() {
         return tokens.get(current).getType() == TokenType.EOF;
     }
@@ -63,6 +111,10 @@ public class Parser {
             }
         }
         return false;
+    }
+        private Token consume(TokenType type, String msg) {
+        if (check(type)) return tokens.get(current++);
+        throw new RuntimeException(msg);
     }
     
 }
