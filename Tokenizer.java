@@ -86,9 +86,14 @@ public class Tokenizer {
                         pos += 2;
                         continue;
                     }
-
-
+                    throw new RuntimeException("Unexpexted charactter !");
+                case ':':
+                    tokenList.add(new Token(TokenType.COLON, ":", line));
+                    break;
+                default:
+                    throw new RuntimeException("Unknown character: " + ch);
             }
+            pos++;
         }
     
     }
