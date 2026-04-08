@@ -61,6 +61,16 @@ public class Tokenizer {
                     }
                     break;
 
+                case '>':
+                    if (pos + 1 < source.length() && source.charAt(pos + 1) == '=') {
+                        tokenList.add(new Token(TokenType.GREATER_EQUAL, ">=", line));
+                        pos += 2;
+                        continue;
+                    } else {
+                        tokenList.add(new Token(TokenType.GREATER, ">", line));
+                    }
+                    break;
+
 
             }
         }
