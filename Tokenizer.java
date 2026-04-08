@@ -51,6 +51,16 @@ public class Tokenizer {
                     tokenList.add(new Token(TokenType.DIVIDE, "/", line));
                     break;
 
+                case '=':
+                    if (pos + 1 < source.length() && source.charAt(pos + 1) == '=') {
+                        tokenList.add(new Token(TokenType.EQUAL_EQUAL, "==", line));
+                        pos += 2;
+                        continue;
+                    } else {
+                        tokenList.add(new Token(TokenType.EQUAL, "=", line));
+                    }
+                    break;
+
 
             }
         }
