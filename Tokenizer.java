@@ -70,6 +70,15 @@ public class Tokenizer {
                         tokenList.add(new Token(TokenType.GREATER, ">", line));
                     }
                     break;
+                case '<':
+                    if (pos + 1 < source.length() && source.charAt(pos + 1) == '=') {
+                        tokenList.add(new Token(TokenType.LESS_EQUAL, "<=", line));
+                        pos += 2;
+                        continue;
+                    } else {
+                        tokenList.add(new Token(TokenType.LESS, "<", line));
+                    }
+                    break;
 
 
             }
