@@ -97,6 +97,13 @@ public class Tokenizer {
         }
         tokenList.add(new Token(TokenType.EOF, "", line));
         return tokenList;
-    
     }
-}
+    private Token readNumber() {
+        StringBuilder sb = new StringBuilder();
+        while (pos < source.length() && (Character.isDigit(source.charAt(pos))|| source.charAt(pos)=='.')) {
+            sb.append(source.charAt(pos));
+            pos++;
+        }
+        return new Token(TokenType.NUMBER, sb.toString(), line);
+    } 
+}   
