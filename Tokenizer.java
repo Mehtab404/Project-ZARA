@@ -95,6 +95,8 @@ public class Tokenizer {
             }
             pos++;
         }
+        tokenList.add(new Token(TokenType.EOF, "", line));
+        return tokenList;
     
     }
 }
