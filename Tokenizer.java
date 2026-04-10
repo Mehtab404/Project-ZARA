@@ -126,4 +126,19 @@ public class Tokenizer {
         return new Token(TokenType.IDENTIFIER, word, line);
     }
 
+    private Token readString() {
+        pos++;
+        StringBuilder sb = new StringBuilder();
+        while (pos < source.length() && source.charAt(pos) != '"') {
+            sb.append(source.charAt(pos));
+            pos++;
+        }
+        if (pos >= source.length()) {
+            throw new RuntimeException("Unterminated string at line " + line);
+        }
+        pos++;
+        return new Token(TokenType.STRING, sb.toString(), line);
+
+    }
+
 }   
