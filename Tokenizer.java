@@ -105,5 +105,25 @@ public class Tokenizer {
             pos++;
         }
         return new Token(TokenType.NUMBER, sb.toString(), line);
-    } 
+    }
+    
+    private Token readWord() {
+        StringBuilder sb = new StringBuilder();
+        while (pos < source.length() && Character.isLetterOrDigit(source.charAt(pos))) {
+            sb.append(source.charAt(pos));
+            pos++;
+        }
+        String word = sb.toString().toLowerCase();
+        if (word.equals("set"))
+            return new Token(TokenType.SET, "set", line);
+        if (word.equals("show"))
+            return new Token(TokenType.SHOW, "show", line);
+        if (word.equals("when"))
+            return new Token(TokenType.WHEN, "when", line);
+        if (word.equals("loop"))
+            return new Token(TokenType.LOOP, "loop", line);
+
+        return new Token(TokenType.IDENTIFIER, word, line);
+    }
+
 }   
