@@ -1,4 +1,3 @@
-package ZARA;
 
 public class NumberNode implements Expression{
     private Double value;
