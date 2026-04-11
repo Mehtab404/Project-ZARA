@@ -141,4 +141,12 @@ public class Tokenizer {
 
     }
 
+    public static void main(String[] args) {
+        String st="set x = 10 when x >= 5 show \"big\"";
+        Tokenizer t1=new Tokenizer(st);
+        for (Token t : t1.tokenize()) {
+            System.out.println(t.getType() + " : " + t.getValue());
+        }
+    }
+
 }   
