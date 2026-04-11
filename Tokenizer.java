@@ -126,4 +126,27 @@ public class Tokenizer {
         return new Token(TokenType.IDENTIFIER, word, line);
     }
 
+    private Token readString() {
+        pos++;
+        StringBuilder sb = new StringBuilder();
+        while (pos < source.length() && source.charAt(pos) != '"') {
+            sb.append(source.charAt(pos));
+            pos++;
+        }
+        if (pos >= source.length()) {
+            throw new RuntimeException("Unterminated string at line " + line);
+        }
+        pos++;
+        return new Token(TokenType.STRING, sb.toString(), line);
+
+    }
+
+    public static void main(String[] args) {
+        String st="set x = 10 when x >= 5 show \"big\"";
+        Tokenizer t1=new Tokenizer(st);
+        for (Token t : t1.tokenize()) {
+            System.out.println(t.getType() + " : " + t.getValue());
+        }
+    }
+
 }   
